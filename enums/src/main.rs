@@ -24,6 +24,10 @@ fn main() {
 
     println!("Value of six: {:?}", six);
     println!("Value of none: {:?}", none);
+
+    // example 3
+    let coin_2 = Some(Coin::Nickel);
+    match_example(coin_2);
 }
 
 fn value_in_cents(coin: Coin) -> u8 {
@@ -48,5 +52,20 @@ fn plus_one(num: Option<i32>) -> Option<i32> {
     match num {
         None => None,
         Some(i) => Some(i+1)
+    }
+}
+
+fn match_example(coin: Option<Coin>) {
+
+    match coin {
+        Some(Coin::Penny) => println!("lucky penny!"),
+        _ => println!("this is not a penny :/")     // otherwise, print this
+    }
+
+    // alternative using if let
+    if let Some(Coin::Penny) = coin {
+        println!("lucky penny from if let!");
+    } else {
+        println!("this is not a penny, from if let");
     }
 }
