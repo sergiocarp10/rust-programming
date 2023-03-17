@@ -3,7 +3,17 @@ The Rust Programming Language
 
 https://doc.rust-lang.org/book
 
-## Keywords
+# Collections
+
+## Vectores
+Se pueden instanciar vacíos mediante ```Vec::new()```, o bien con valores iniciales mediante la macro ```vec![v1, v2, v3...]```. Sus elementos se ubican de forma contigua en memoria. 
+
+Para obtener elementos se puede usar el índice de toda la vida (que causa una excepción si se referencia a una posición fuera de rango) o el método ```get(pos)``` que devuelve Option<> para manejar el posible error.
+
+Para agregar elementos, se usa el método ```push(elem)```. Se debe tener en cuenta que esto puede provocar que todo el vector deba re-localizarse a una porción de memoria más grande. Por tal motivo, no puede haber referencias inmutables a posiciones del vector previo al push.
+
+
+# Keywords
 * as: utilizado luego de ```use + ruta al módulo o función``` para renombrarlo y evitar colisión de nombre (cap. 7.4)
 
 ## use
