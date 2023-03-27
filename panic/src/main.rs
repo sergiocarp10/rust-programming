@@ -23,6 +23,12 @@ fn main() {
     let filename = String::from("three.txt");
     let primera_linea = read_first_line(&filename).expect("No se pudo leer la primera linea. Detalles");
     println!("Primera linea: {}", primera_linea);
+
+    let ultimo = extract_line_last_char(&primera_linea);
+    if ultimo.is_some() {
+        println!("Ultimo caracter: {}", ultimo.unwrap());
+    } 
+
 }
 
 fn read_first_line(filename: &String) -> Result<String, io::Error> {
@@ -38,4 +44,11 @@ fn read_first_line(filename: &String) -> Result<String, io::Error> {
 
     // como el tipo de retorno es Result, debo devolver objeto Ok(String)
     return Ok(first_line);
+}
+
+// tambien podemos usar ? para retornar con Option
+fn extract_line_last_char(text: &String) -> Option<char> {
+   
+    // necesariamente se debe retornar el tipo char al final o None en el medio
+    return text.lines().next()?.chars().last();
 }

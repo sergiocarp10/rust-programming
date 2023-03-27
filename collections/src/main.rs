@@ -31,7 +31,7 @@ fn ex_median(sorted_vec: &Vec<i32>) -> i32 {
 // No vamos a alterar el vector, así que usamos referencia
 fn ex_mode(vec: &Vec<i32>) -> i32 {
     // lo inicializo como mutable porque cambiará durante esta función
-    let mut aux: HashMap<i32, i32> = HashMap::new();
+    let mut aux: HashMap<i32, u32> = HashMap::new();
 
     for elem in vec {
         // si no está, crear con valor 0
@@ -43,7 +43,7 @@ fn ex_mode(vec: &Vec<i32>) -> i32 {
     }
 
     // ahora buscamos el máximo en el HashMap
-    let mut max_value = 0;
+    let mut max_value: u32 = 0;
     let mut max_key = -1;
 
     // acá tomo ownership del HashMap porque no lo voy a utilizar despues
