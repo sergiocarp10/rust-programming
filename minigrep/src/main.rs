@@ -48,16 +48,21 @@ fn main() {
     let mut file = File::open(params.file_path).expect("No se puede abrir el archivo!");
 
     // Buscamos el substring en cada linea del archivo
-    let mut results: Vec<&str> = Vec::new();
+    // let mut results: Vec<&str> = Vec::new();
     let mut content = String::new();
 
     file.read_to_string(&mut content).expect("No se puede leer...");
 
+    /*
     for line in content.lines() {
         if line.contains(&params.query) {
             results.push(line);
         }
-    }
+    } */
+
+    let results: Vec<&str> = content.lines()
+        .filter(|l| l.contains(&params.query))
+        .collect();
 
     // Mostrar resultados
     for line_matched in results {
