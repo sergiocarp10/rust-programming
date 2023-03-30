@@ -1,3 +1,4 @@
+use std::io::Read;
 use std::{env, fs::File};
 use std::process;
 
@@ -34,7 +35,7 @@ fn main() {
     // Solo los vamos a leer, así que pasamos referencia
     let params = Params::from(&args).unwrap_or_else(|err| {
         // Se debe devolver el tipo Params o bien forzar un process:exit()
-        println!("Error: {}", err);
+        println!("Error: {err}");
         process::exit(1);
     });
 
@@ -44,7 +45,25 @@ fn main() {
 
     // Abrimos el archivo
     // Para evitar evaluar el Result usamos expect para informar error si corresponde
-    let file = File::open(params.file_path).expect("No se puede abrir el archivo!");
+    let mut file = File::open(params.file_path).expect("No se puede abrir el archivo!");
+
+    // Buscamos el substring en cada linea del archivo
+    let mut results: Vec<&str> = Vec::new();
+    let mut content = String::new();
+
+    file.read_to_string(&mut content).expect("No se puede leer...");
+
+    for line in content.lines() {
+        if line.contains(&params.query) {
+            results.push(line);
+        }
+    }
+
+    // Mostrar resultados
+    for line_matched in results {
+        println!("{line_matched}");
+    }
+
 }
 
 // Hint: usar [Tipo] es lo mismo que Vec<Tipo>
